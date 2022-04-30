@@ -1,0 +1,229 @@
+{
+  "configs": [
+    {
+      "types": {
+        "event-created": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, new prediction!",
+                "type": "chat"
+              }
+            ]
+          }
+        ]
+      },
+      "for": "predictions-channel-v1"
+    },
+    {
+      "types": {
+        "POLL_CREATE": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, new poll!",
+                "type": "chat"
+              }
+            ]
+          }
+        ],
+        "POLL_COMPLETE": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, poll ended!",
+                "type": "chat"
+              }
+            ]
+          }
+        ]
+      },
+      "for": "polls"
+    },
+    {
+      "types": {
+        "reward-redeemed": [
+          {
+            "name": "In-Game Chat Notice",
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, channel point reward redeemed!",
+                "type": "chat"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "Oops All Berries",
+            "conditions": [
+              {
+                "variableName": "redemption_reward_id",
+                "variableResult": "b970586c-ba27-4fdb-a48b-3a7c35cfac24",
+                "type": "variableCheck"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/give $streamer simpledelights:chocolate_strawberries 6",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "simpledelights:chocolate_strawberries 6"
+              }
+            ]
+          },
+          {
+            "name": "Burger Time",
+            "conditions": [
+              {
+                "variableName": "redemption_reward_id",
+                "variableResult": "891458cd-9a4d-41fc-832b-608dcd8327e2",
+                "type": "variableCheck"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/give $streamer simplefarming:cheeseburger",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "gib cheezborgar"
+              }
+            ]
+          },
+          {
+            "name": "Hot dogs",
+            "conditions": [
+              {
+                "variableName": "redemption_reward_id",
+                "variableResult": "706af9c5-27e8-48e7-a3e0-970f7d8026dd",
+                "type": "variableCheck"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/give $streamer simplefarming:hotdog",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "give hot dog"
+              }
+            ]
+          },
+          {
+            "name": "Cheese",
+            "conditions": [
+              {
+                "variableName": "redemption_reward_id",
+                "variableResult": "d6eec61a-f1ce-4453-91a1-cb06aa8692b9",
+                "type": "variableCheck"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/give seguran simplefarming:cheese_slice",
+                "executeAsSelf": true,
+                "type": "command",
+                "weight": 7
+              },
+              {
+                "command": "/give seguran simplefarming:cheese_block",
+                "executeAsSelf": true,
+                "type": "command",
+                "weight": 3
+              }
+            ]
+          },
+          {
+            "name": "Hydrate",
+            "conditions": [
+              {
+                "variableName": "redemption_reward_id",
+                "variableResult": "c12a77ee-130f-4bca-8074-4c58d32b0996",
+                "type": "variableCheck"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/give $streamer resourcefulbees:water_honey_bottle",
+                "executeAsSelf": true,
+                "type": "command"
+              }
+            ]
+          }
+        ]
+      },
+      "for": "community-points-channel-v1"
+    },
+    {
+      "types": {
+        "moderation_action": [
+          {
+            "disabled": true,
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Heads up $streamer, something happened in chat!",
+                "type": "chat"
+              }
+            ]
+          }
+        ]
+      },
+      "for": "chat_moderator_actions"
+    },
+    {
+      "types": {
+        "hype-train-start": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, HYPE TRAIN!",
+                "type": "chat"
+              },
+              {
+                "command": "/playsound transport:whistle player $streamer",
+                "executeAsSelf": true,
+                "type": "command"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ],
+        "hype-train-end": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Choo Chooo!",
+                "type": "chat"
+              },
+              {
+                "command": "/playsound losttrinkets:unlock player $streamer",
+                "executeAsSelf": true,
+                "type": "command"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ],
+        "hype-train-approaching": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hype train incoming!",
+                "type": "chat"
+              }
+            ]
+          }
+        ]
+      },
+      "for": "hype-train-events-v1"
+    }
+  ],
+  "init": [],
+  "type": "twitchpubsub"
+}

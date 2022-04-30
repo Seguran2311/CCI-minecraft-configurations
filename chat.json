@@ -1,0 +1,137 @@
+{
+  "configs": [
+    {
+      "types": {
+        "message": [
+          {
+            "name": "setmcname",
+            "conditions": [
+              {
+                "source": "$message",
+                "target": "!setmcname",
+                "type": "stringStarts",
+                "displayName": "!setmcname check"
+              },
+              {
+                "source": "$message",
+                "beginIndex": 11,
+                "result": "nameArg",
+                "type": "stringSubstr",
+                "displayName": "mcname grab"
+              },
+              {
+                "source": "$nameArg",
+                "result": "nameArg",
+                "type": "stringTrim",
+                "displayName": "mcname trimming"
+              },
+              {
+                "source": "$user",
+                "result": "userLC",
+                "type": "stringLower"
+              }
+            ],
+            "outcomes": [
+              {
+                "noteName": "mcName_$userLC",
+                "noteContent": "$nameArg",
+                "type": "note",
+                "displayName": "mcName_$userLC note"
+              },
+              {
+                "message": "$user 's minecraft name is $mcnameuser",
+                "type": "chat"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "Toast notification",
+            "conditions": [],
+            "outcomes": [
+              {
+                "title": "$user says:",
+                "subtitle": "$message",
+                "titleColor": "$color",
+                "type": "toast"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "!feed ",
+            "conditions": [
+              {
+                "source": "$message",
+                "target": "!feed",
+                "type": "stringContains",
+                "displayName": "!feed check"
+              }
+            ],
+            "outcomes": [
+              {
+                "target": "$streamer",
+                "level": "10",
+                "saturation": "10",
+                "type": "food"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "!heal",
+            "conditions": [
+              {
+                "source": "$message",
+                "target": "!heal",
+                "type": "stringContains",
+                "displayName": "!heal check"
+              }
+            ],
+            "outcomes": [
+              {
+                "target": "$streamer",
+                "amount": "10",
+                "type": "health"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ],
+        "action": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "toastType": 2,
+                "title": "$user",
+                "subtitle": "$message",
+                "type": "toast"
+              }
+            ]
+          }
+        ]
+      },
+      "for": "twitch"
+    },
+    {
+      "types": {
+        "textMessageEvent": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "title": "$authorDetails_displayName says:",
+                "subtitle": "$displayMessage",
+                "type": "toast"
+              }
+            ]
+          }
+        ]
+      },
+      "for": "youtube"
+    }
+  ],
+  "init": [],
+  "type": "chat"
+}

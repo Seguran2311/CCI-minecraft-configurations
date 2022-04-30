@@ -1,0 +1,374 @@
+{
+  "configs": [
+    {
+      "types": {
+        "cheer": [
+          {
+            "name": "Cheer Notification",
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, $user just sent you $amount bits!",
+                "type": "chat"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true,
+            "playTime": "20"
+          },
+          {
+            "name": "500 bit: Killer Rabbit",
+            "conditions": [
+              {
+                "amount": 500.0,
+                "type": "amount",
+                "displayName": "500 cheer"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:rabbit ~ ~ ~ {RabbitType:99}",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon Killer Rabbit"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "100 bit loop: minime",
+            "conditions": [
+              {
+                "calc": "/",
+                "value1": "$amount",
+                "value2": "100",
+                "variableName": "hundreds",
+                "type": "math",
+                "displayName": "amount/100"
+              },
+              {
+                "calc": "floor",
+                "value1": "$hundreds",
+                "value2": "1",
+                "variableName": "hunf",
+                "type": "math",
+                "displayName": "hundreds floor"
+              },
+              {
+                "noteName": "mcName_$userLC",
+                "variableName": "$mcnameuser",
+                "meetConditionIfNoteDoesNotExist": true,
+                "defaultVariableValue": "$user",
+                "type": "note"
+              }
+            ],
+            "outcomes": [
+              {
+                "times": "$hunf",
+                "outcome": {
+                  "command": "/summon miniatures:minime ~ ~ ~ {owner:\"$mcnameuser\"}",
+                  "executeAsSelf": true,
+                  "type": "command"
+                },
+                "type": "repeat"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "1000 bit: Vindicator ",
+            "conditions": [
+              {
+                "amount": 1000.0,
+                "type": "amount",
+                "displayName": "1000 cheer"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:vindicator",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon Vindicator"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "2500 bit: Evoker ",
+            "conditions": [
+              {
+                "amount": 2500.0,
+                "type": "amount",
+                "displayName": "2500 cheer"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:evoker",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon Evoker"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ],
+        "subscriber": [
+          {
+            "name": "Subscriber Notification",
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, $user just subscribed for $amount months!",
+                "type": "chat"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true,
+            "playTime": "20"
+          },
+          {
+            "name": "Tier 1 : Killer Rabbit",
+            "conditions": [
+              {
+                "optionalVariableName": "tier",
+                "amount": 1000.0,
+                "type": "amount",
+                "displayName": "Tier 1 check"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:rabbit ~ ~ ~ {RabbitType:99}",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon: Killer Rabbit"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "Tier 2 : Vindicator",
+            "conditions": [
+              {
+                "optionalVariableName": "tier",
+                "amount": 2000.0,
+                "type": "amount",
+                "displayName": "Tier 2 check"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:vindicator",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon: vindicator"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "Tier 3 : Evoker",
+            "conditions": [
+              {
+                "optionalVariableName": "tier",
+                "amount": 3000.0,
+                "type": "amount",
+                "displayName": "Tier 3 check"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:evoker",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon: evoker"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ],
+        "follow": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, $user just followed!",
+                "type": "chat"
+              }
+            ],
+            "playTime": "20"
+          }
+        ],
+        "host": [
+          {
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, $user just hosted you for up to $amount viewers!",
+                "type": "chat"
+              }
+            ],
+            "playTime": "20"
+          }
+        ],
+        "raid": [
+          {
+            "name": "Chat Notification",
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, $user just raided you with $amount raiders!",
+                "type": "chat"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "Raid loop",
+            "conditions": [
+              {
+                "noteName": "mcName_$userLC",
+                "variableName": "$mcnameuser",
+                "meetConditionIfNoteDoesNotExist": true,
+                "defaultVariableValue": "$user",
+                "type": "note"
+              }
+            ],
+            "outcomes": [
+              {
+                "times": "$amount",
+                "outcome": {
+                  "condition": {
+                    "optionalVariableName": "$iteCount",
+                    "amount": 20.0,
+                    "type": "amount"
+                  },
+                  "outcome": {
+                    "type": "null"
+                  },
+                  "conditionNotMetOutcome": {
+                    "command": "/summon miniatures:minime ~ ~ ~ {owner:\"$user\"}",
+                    "executeAsSelf": true,
+                    "type": "command",
+                    "displayName": "Mini"
+                  },
+                  "type": "conditional"
+                },
+                "breakCondition": {
+                  "optionalVariableName": "$iteCount",
+                  "amount": 19.0,
+                  "type": "amount"
+                },
+                "type": "repeat"
+              },
+              {
+                "command": "/summon miniatures:maxime ~ ~ ~ {owner:\"$mcnameuser\"}",
+                "executeAsSelf": true,
+                "type": "command"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ],
+        "tip": [
+          {
+            "name": "Tip Notification",
+            "conditions": [],
+            "outcomes": [
+              {
+                "message": "Hey $streamer, $user just tipped $$amount!",
+                "type": "chat"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "5 USD: Killer Rabbit",
+            "conditions": [
+              {
+                "amount": 5.0,
+                "type": "amount"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:rabbit ~ ~ ~ {RabbitType:99}",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon: Killer Rabbit"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "10 USD: Vindicator",
+            "conditions": [
+              {
+                "amount": 10.0,
+                "type": "amount"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:vindicator",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon: Vindicator"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "25 USD: Evoker",
+            "conditions": [
+              {
+                "amount": 25.0,
+                "type": "amount"
+              }
+            ],
+            "outcomes": [
+              {
+                "command": "/summon minecraft:evoker",
+                "executeAsSelf": true,
+                "type": "command",
+                "displayName": "Summon: Evoker"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          },
+          {
+            "name": "1 usd minime loop",
+            "conditions": [
+              {
+                "noteName": "mcName_$userLC",
+                "variableName": "$mcnameuser",
+                "meetConditionIfNoteDoesNotExist": true,
+                "defaultVariableValue": "$user",
+                "type": "note"
+              }
+            ],
+            "outcomes": [
+              {
+                "times": "$amount",
+                "outcome": {
+                  "command": "/summon miniatures:minime ~ ~ ~ {owner:\"$mcnameuser\"}",
+                  "executeAsSelf": true,
+                  "type": "command"
+                },
+                "type": "repeat",
+                "displayName": "minime spawns"
+              }
+            ],
+            "allowsOtherEventsToTrigger": true
+          }
+        ]
+      },
+      "queue": [
+        "host+subscriber+cheer",
+        "follow"
+      ]
+    }
+  ],
+  "init": [],
+  "type": "streamelements"
+}
